@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Registration Form</title>
+    <style>
+        body {
+            background-image: url('picture.jpg');
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-color: lavender;
+            text-align: center;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        form {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 8px;
+            width: 60%;
+            margin: auto;
+            text-align: left;
+        }
+
+        input[type="text"], input[type="date"], select {
+            width: 100%;
+            padding: 8px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .btn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        .btn:hover {
+            background-color: #45a049;
+        }
+
+        .error {
+            color: red;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Registration Form</h1>
+<hr>
+<marquee scrollamount="10">
+    <div style="font-size:20px;color:red">
+        Enter your personal details on or before 12 Jan 2025. For any further inquiries, contact +91 9099678433. If the website stops responding, please revisit after an hour.
+    </div>
+</marquee>
+<hr>
+
+<form name="registrationForm" onsubmit="return validateForm()">
+    <fieldset>
+        <legend><b>Personal Details</b></legend>
+        
+        First Name
+        <input type="text" name="firstname" placeholder="Enter Your First Name">
+        <span class="error" id="error-firstname"></span><br>
+
+        Last Name
+        <input type="text" name="lastname" placeholder="Enter Your Last Name">
+        <span class="error" id="error-lastname"></span><br>
+
+        Email
+        <input type="text" name="Email" placeholder="Enter Your Email">
+        <span class="error" id="error-email"></span><br>
+
+        Mobile No
+        <input type="text" name="MobileNo" placeholder="Enter Your Mobile No">
+        <span class="error" id="error-mobileno"></span><br>
+
+        PAN Number
+        <input type="text" name="PANNumber" placeholder="Enter Your PAN">
+        <span class="error" id="error-pan"></span><br>
+
+        Aadhar Number
+        <input type="text" name="AadharNumber" placeholder="Enter Your Aadhar">
+        <span class="error" id="error-aadhar"></span><br>
+
+        <p><b>Select Gender:</b></p>
+        <input type="radio" id="gender1" name="gender" value="Male">
+        <label for="gender1">Male</label>
+        <input type="radio" id="gender2" name="gender" value="Female">
+        <label for="gender2">Female</label>
+        <span class="error" id="error-gender"></span><br>
+
+        <p><b>Select Date of Birth:</b></p>
+        <input type="date" name="DOB">
+        <span class="error" id="error-dob"></span><br>
+
+        <p><b>Interested Courses</b></p>
+        <select name="course">
+            <option value="Select">Select</option>
+            <option value="machine learning">Machine Learning</option>
+            <option value="deep thinking">Deep Thinking</option>
+            <option value="optimization">Optimization</option>
+            <option value="english and technical communication">English and Technical Communication</option>
+        </select><br>
+
+        <p><b>Select Age:</b></p>
+        <input type="radio" id="age1" name="age" value="15">
+        <label for="age1">0 to 15</label><br>
+        <input type="radio" id="age2" name="age" value="30">
+        <label for="age2">15 to 30</label><br>
+        <span class="error" id="error-age"></span>
+
+        <br><b>Temporary Address</b><br>
+        <input type="text" name="TemporaryAddress">
+        <span class="error" id="error-tempaddress"></span><br>
+
+        <b>Permanent Address</b><br>
+        <input type="text" name="PermanentAddress">
+        <span class="error" id="error-permaddress"></span><br>
+
+        <p><b>CGPA of Sem 1:</b></p>
+        <input type="text" name="Cgpa">
+        <span class="error" id="error-cgpa"></span><br>
+
+        <p><b>Select Favourite Color:</b></p>
+        <input type="checkbox" id="color1" name="color" value="Red">
+        <label for="color1">Red</label><br>
+        <input type="checkbox" id="color2" name="color" value="Blue">
+        <label for="color2">Blue</label><br>
+
+        <button type="submit" class="btn">Submit</button>
+    </fieldset>
+</form>
+
+<script>
+function validateForm() {
+    let isValid = true;
+
+    // Clear previous error messages
+    let errors = document.getElementsByClassName('error');
+    for (let error of errors) {
+        error.textContent = '';
+    }
+
+    // Validate first name
+    let firstname = document.forms["registrationForm"]["firstname"].value;
+    if (firstname === "") {
+        document.getElementById("error-firstname").textContent = "First name is required!";
+        isValid = false;
+    }
+
+    // Validate last name
+    let lastname = document.forms["registrationForm"]["lastname"].value;
+    if (lastname === "") {
+        document.getElementById("error-lastname").textContent = "Last name is required!";
+        isValid = false;
+    }
+
+    // Validate email format
+    let email = document.forms["registrationForm"]["Email"].value;
+    let emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    if (!emailPattern.test(email)) {
+        document.getElementById("error-email").textContent = "Please enter a valid email address!";
+        isValid = false;
+    }
+
+    // Validate mobile number
+    let mobile = document.forms["registrationForm"]["MobileNo"].value;
+    let mobilePattern = /^[0-9]{10}$/;
+    if (!mobilePattern.test(mobile)) {
+        document.getElementById("error-mobileno").textContent = "Please enter a valid 10-digit mobile number!";
+        isValid = false;
+    }
+
+    // Validate PAN number (assumed format)
+    let pan = document.forms["registrationForm"]["PANNumber"].value;
+    let panPattern = /^[A-Z]{5}[0-9]{4}[A-Z]{1}$/;
+    if (!panPattern.test(pan)) {
+        document.getElementById("error-pan").textContent = "Please enter a valid PAN number!";
+        isValid = false;
+    }
+
+    // Validate Aadhar number (assumed format)
+    let aadhar = document.forms["registrationForm"]["AadharNumber"].value;
+    let aadharPattern = /^[0-9]{12}$/;
+    if (!aadharPattern.test(aadhar)) {
+        document.getElementById("error-aadhar").textContent = "Aadhar number must be 12 digits!";
+        isValid = false;
+    }
+
+    // Validate gender
+    let gender = document.forms["registrationForm"]["gender"].value;
+    if (gender === "") {
+        document.getElementById("error-gender").textContent = "Please select your gender!";
+        isValid = false;
+    }
+
+    // Validate Date of Birth
+    let dob = document.forms["registrationForm"]["DOB"].value;
+    if (dob === "") {
+        document.getElementById("error-dob").textContent = "Please select your date of birth!";
+        isValid = false;
+    }
+
+    // Validate age selection
+    let age = document.forms["registrationForm"]["age"].value;
+    if (age === "") {
+        document.getElementById("error-age").textContent = "Please select your age group!";
+        isValid = false;
+    }
+
+    // Validate temporary address
+    let tempAddress = document.forms["registrationForm"]["TemporaryAddress"].value;
+    if (tempAddress === "") {
+        document.getElementById("error-tempaddress").textContent = "Temporary address is required!";
+        isValid = false;
+    }
+
+    // Validate permanent address
+    let permAddress = document.forms["registrationForm"]["PermanentAddress"].value;
+    if (permAddress === "") {
+        document.getElementById("error-permaddress").textContent = "Permanent address is required!";
+        isValid = false;
+    }
+
+    // Validate CGPA
+    let cgpa = document.forms["registrationForm"]["Cgpa"].value;
+    if (cgpa === "") {
+        document.getElementById("error-cgpa").textContent = "CGPA is required!";
+        isValid = false;
+    }
+
+    return isValid;
+}
+</script>
+
+</body>
+</html>

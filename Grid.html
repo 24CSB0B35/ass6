@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calculator</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      .calculator {
+        margin: 100px auto;
+        max-width: 320px;
+        background-color: black;
+        border-radius: 10px;
+      }
+      .calculator-buttons {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+      }
+      .mainbar {
+        font-family: 'Space Mono', serif;
+        background: black;
+        color: white;
+        font-size: 2em;
+        border: 0;
+        padding: 0.3em;
+        text-align: right;
+        width: 100%;
+        height: 100px;
+        border-radius: 10px;
+      }
+      .span2 {
+        grid-column: span 2;
+      }
+      .span3 {
+        grid-column: span 3;
+      }
+      .btn {
+        font-size: 1em;
+        height: 65px;
+        border: 1px solid black;
+        border-radius: 10px;
+      }
+      .btn:hover {
+        background: #d3d3d3;
+        opacity: 1;
+      }
+      .orange {
+        background-color: orange;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 style="text-align: center;">Calculator</h1>
+
+    <div class="calculator">
+      <input type="text" class="mainbar" id="display" value="0" disabled />
+
+      <div class="calculator-buttons">
+        <button class="btn span2 orange operator" onclick="clearDisplay()">C</button>
+        <button class="btn orange operator" onclick="deleteLastCharacter()">del</button>
+        <button class="btn orange operator" onclick="appendOperator('÷')">÷</button>
+        <button class="btn" onclick="appendNumber(7)">7</button>
+        <button class="btn" onclick="appendNumber(8)">8</button>
+        <button class="btn" onclick="appendNumber(9)">9</button>
+        <button class="btn orange operator" onclick="appendOperator('*')">x</button>
+        <button class="btn" onclick="appendNumber(4)">4</button>
+        <button class="btn" onclick="appendNumber(5)">5</button>
+        <button class="btn" onclick="appendNumber(6)">6</button>
+        <button class="btn orange operator" onclick="appendOperator('-')">-</button>
+        <button class="btn" onclick="appendNumber(1)">1</button>
+        <button class="btn" onclick="appendNumber(2)">2</button>
+        <button class="btn" onclick="appendNumber(3)">3</button>
+        <button class="btn orange operator" onclick="appendOperator('+')">+</button>
+        <button class="btn span2" onclick="appendNumber(0)">0</button>
+        <button class="btn" onclick="appendDot()">.</button>
+        <button class="btn orange operator" onclick="calculateResult()">=</button>
+      </div>
+    </div>
+
+    <script>
+      let currentInput = '0';
+      let operator = '';
+      let previousInput = '';
+      let result = null;
+
+      function updateDisplay() {
+        document.getElementById('display').value = currentInput;
+      }
+
+      function clearDisplay() {
+        currentInput = '0';
+        previousInput = '';
+        operator = '';
+        result = null;
+        updateDisplay();
+      }
+
+      function deleteLastCharacter() {
+        currentInput = currentInput.slice(0, -1);
+        if (currentInput === '') {
+          currentInput = '0';
+        }
+        updateDisplay();
+      }
+
+      function appendNumber(number) {
+        if (currentInput === '0') {
+          currentInput = String(number);
+        } else {
+          currentInput += number;
+        }
+        updateDisplay();
+      }
+
+      function appendOperator(op) {
+        if (operator !== '') {
+          calculateResult();
+        }
+        previousInput = currentInput;
+        operator = op;
+        currentInput = '';
+      }
+
+      function appendDot() {
+        if (!currentInput.includes('.')) {
+          currentInput += '.';
+        }
+        updateDisplay();
+      }
+
+      function calculateResult() {
+        if (previousInput === '' || currentInput === '') return;
+
+        let calculation = 0;
+        switch (operator) {
+          case '+':
+            calculation = parseFloat(previousInput) + parseFloat(currentInput);
+            break;
+          case '-':
+            calculation = parseFloat(previousInput) - parseFloat(currentInput);
+            break;
+          case '*':
+            calculation = parseFloat(previousInput) * parseFloat(currentInput);
+            break;
+          case '÷':
+            if (currentInput !== '0') {
+              calculation = parseFloat(previousInput) / parseFloat(currentInput);
+            } else {
+              alert('Cannot divide by zero');
+              clearDisplay();
+              return;
+            }
+            break;
+        }
+
+        currentInput = String(calculation);
+        operator = '';
+        previousInput = '';
+        updateDisplay();
+      }
+    </script>
+  </body>
+</html>
