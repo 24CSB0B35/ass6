@@ -143,27 +143,27 @@
 function validateForm() {
     let isValid = true;
 
-    // Clear previous error messages
+    
     let errors = document.getElementsByClassName('error');
     for (let error of errors) {
         error.textContent = '';
     }
 
-    // Validate first name
+ 
     let firstname = document.forms["registrationForm"]["firstname"].value;
     if (firstname === "") {
         document.getElementById("error-firstname").textContent = "First name is required!";
         isValid = false;
     }
 
-    // Validate last name
+
     let lastname = document.forms["registrationForm"]["lastname"].value;
     if (lastname === "") {
         document.getElementById("error-lastname").textContent = "Last name is required!";
         isValid = false;
     }
 
-    // Validate email format
+   
     let email = document.forms["registrationForm"]["Email"].value;
     let emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     if (!emailPattern.test(email)) {
@@ -171,7 +171,7 @@ function validateForm() {
         isValid = false;
     }
 
-    // Validate mobile number
+  
     let mobile = document.forms["registrationForm"]["MobileNo"].value;
     let mobilePattern = /^[0-9]{10}$/;
     if (!mobilePattern.test(mobile)) {
@@ -179,7 +179,6 @@ function validateForm() {
         isValid = false;
     }
 
-    // Validate PAN number (assumed format)
     let pan = document.forms["registrationForm"]["PANNumber"].value;
     let panPattern = /^[A-Z]{5}[0-9]{4}[A-Z]{1}$/;
     if (!panPattern.test(pan)) {
@@ -187,7 +186,7 @@ function validateForm() {
         isValid = false;
     }
 
-    // Validate Aadhar number (assumed format)
+
     let aadhar = document.forms["registrationForm"]["AadharNumber"].value;
     let aadharPattern = /^[0-9]{12}$/;
     if (!aadharPattern.test(aadhar)) {
@@ -195,42 +194,42 @@ function validateForm() {
         isValid = false;
     }
 
-    // Validate gender
+    
     let gender = document.forms["registrationForm"]["gender"].value;
     if (gender === "") {
         document.getElementById("error-gender").textContent = "Please select your gender!";
         isValid = false;
     }
 
-    // Validate Date of Birth
+
     let dob = document.forms["registrationForm"]["DOB"].value;
     if (dob === "") {
         document.getElementById("error-dob").textContent = "Please select your date of birth!";
         isValid = false;
     }
 
-    // Validate age selection
+    
     let age = document.forms["registrationForm"]["age"].value;
     if (age === "") {
         document.getElementById("error-age").textContent = "Please select your age group!";
         isValid = false;
     }
 
-    // Validate temporary address
+  
     let tempAddress = document.forms["registrationForm"]["TemporaryAddress"].value;
     if (tempAddress === "") {
         document.getElementById("error-tempaddress").textContent = "Temporary address is required!";
         isValid = false;
     }
 
-    // Validate permanent address
+    
     let permAddress = document.forms["registrationForm"]["PermanentAddress"].value;
     if (permAddress === "") {
         document.getElementById("error-permaddress").textContent = "Permanent address is required!";
         isValid = false;
     }
 
-    // Validate CGPA
+    
     let cgpa = document.forms["registrationForm"]["Cgpa"].value;
     if (cgpa === "") {
         document.getElementById("error-cgpa").textContent = "CGPA is required!";
